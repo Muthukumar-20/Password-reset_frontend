@@ -64,7 +64,7 @@ const Resetpassword = () => {
           </button>
         </p>
         <br></br>
-        <button type="submit">Update  </button>
+        <button type="submit">Update </button>
       </form>   
 
         </div>
