@@ -7,9 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 
-    const [name, setName] = useState("Muthu");
-    const [email, setEmail] = useState("mk2778551@gmail.com");
-    const [password, setPassword] = useState("123");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
   
