@@ -1,32 +1,32 @@
 import React from 'react';
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from 'axios';
 
 const Resetpassword = () => {
 
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { id, token } = useParams();
-  
+    const {stringtoken } = useParams();
+    const [isLoading, setIsLoading] = useState(false);
+    
+
     const handleSubmit = async (e) => {
       e.preventDefault();
-      await axios
-        .post(`https://password-reset-backend-4dnh.onrender.com/api/auth/reset-password/${id}/${token}`, {
-          password,
-        })
-        .then((res) => {
-          toast.success(res.data.message);
-          navigate("/login");
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error(error.response.data.message);
-        });
+      try {
+        const res = await axios.post(`https://password-reset-backend-4dnh.onrender.com/api/auth/reset-password/${stringtoken}`, { password });
+        const message = res?.data?.message || "Password reset successful!";
+        toast.success(message); 
+        navigate("/login");
+      } catch (error) {
+        console.error("API Error:", error);
+        const errorMessage = error?.response?.data?.message ?? "An error occurred during password reset."; // Provide a fallback message if not in the error response.
+        toast.error(errorMessage);
+      }
     };
-
 
 
     return (
@@ -64,7 +64,17 @@ const Resetpassword = () => {
           </button>
         </p>
         <br></br>
-        <button type="submit">Update </button>
+        <div className='flex justify-center pt-10'>
+              {isLoading ? (
+                <button className='disabled:opacity-50 border border-black rounded-md w-32 h-10 font-bold hover:bg-red-600 hover:text-white' type="submit">
+                  Updating...
+                </button>
+              ) : (
+                <button className='border border-black rounded-md w-32 h-10 font-bold hover:bg-red-600 hover:text-white' type="submit">
+                  Update
+                </button>
+              )}
+        </div>
       </form>   
 
         </div>

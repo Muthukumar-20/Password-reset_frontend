@@ -6,9 +6,11 @@ import Resetpassword from './pages/Resetpassword';
 import Forgetpassword from './pages/Forgetpassword';
 import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
-
+import { useState } from 'react';
 
 const App = () => {
+
+
     return (
         <>
         <div>
@@ -19,7 +21,7 @@ const App = () => {
 <Route path='/' element={<Home/>} /> 
 <Route path='/register' element={<Register/>} /> 
 <Route path='/login' element={<Login/>} />
-<Route path='/resetpassword/:id/:token' element={<Resetpassword/>} />
+<Route path="/reset-password/*" element={<Resetpassword/>} />
 <Route path='/forgetpassword' element={<Forgetpassword/>} />
          </Routes>
          </BrowserRouter>   
