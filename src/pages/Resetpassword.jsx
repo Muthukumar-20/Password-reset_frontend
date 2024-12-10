@@ -19,7 +19,7 @@ const Resetpassword = () => {
       try {
         const res = await axios.post(`https://password-reset-backend-4dnh.onrender.com/api/auth/reset-password/${stringtoken}`, { password });
         const message = res?.data?.message || "Password reset successful!";
-        toast.success(message); 
+        toast.success(message);
         navigate("/login");
       } catch (error) {
         console.error("API Error:", error);
